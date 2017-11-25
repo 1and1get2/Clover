@@ -78,6 +78,8 @@ UINT8* getCurrentEdid (VOID)
 }
 
 // EDID code was rewritten by Sherlocks
+// HorizontalSyncPulseWidth: 64 - "HorizontalSyncPulseWidth"
+// VideoInputSignal: 20 - "VideoInputSignal"
 EFI_STATUS GetEdidDiscovered(VOID)
 {
   EFI_STATUS  Status;
@@ -190,6 +192,36 @@ EFI_STATUS GetEdidDiscovered(VOID)
             }
           }
         }
+          
+        // fixes garbled apple logo during second stage boot
+        MsgLog("1. EdidFixHorizontalSyncPulseWidth: 0x%02x, EdidFixVideoInputSignal: 0x%02x\n", gSettings.EdidFixHorizontalSyncPulseWidth, gSettings.EdidFixVideoInputSignal);
+        if (gSettings.EdidFixHorizontalSyncPulseWidth || gSettings.EdidFixVideoInputSignal) {
+          if (gSettings.EdidFixHorizontalSyncPulseWidth) {
+            ((UINT8*)gSettings.CustomEDID)[64] = gSettings.EdidFixHorizontalSyncPulseWidth;
+          }
+          if (gSettings.EdidFixVideoInputSignal) {
+            ((UINT8*)gSettings.CustomEDID)[20] = gSettings.EdidFixVideoInputSignal;
+          }
+
+          ((UINT8*)gSettings.CustomEDID)[127] = (UINT8)(256 - Checksum8(gSettings.CustomEDID, 127));
+          
+          if (!GlobalConfig.DebugLog) {
+            MsgLog("------- New Custom EDID Table\n");
+            for (i=0; i<N; i+=10) {
+              MsgLog("%03d  |", i);
+              for (j=0; j<10; j++) {
+                if (i+j > N-1) break;
+                MsgLog("  %02x", gSettings.CustomEDID[i+j]);
+              }
+              MsgLog("\n");
+            }
+          }
+        } else {
+          MsgLog("EdidFixHorizontalSyncPulseWidth and EdidFixVideoInputSignal not found\n");
+          // ((UINT8*)gSettings.CustomEDID)[127] = (UINT8)(100);
+        }
+
+          
       }
       return Status;
     } else if (N == 0) {
@@ -277,6 +309,35 @@ EFI_STATUS GetEdidDiscovered(VOID)
             }
           }
         }
+
+        // fixes garbled apple logo during second stage boot
+        MsgLog("2. EdidFixHorizontalSyncPulseWidth: 0x%02x, EdidFixVideoInputSignal: 0x%02x\n", gSettings.EdidFixHorizontalSyncPulseWidth, gSettings.EdidFixVideoInputSignal);
+        if (gSettings.EdidFixHorizontalSyncPulseWidth || gSettings.EdidFixVideoInputSignal) {
+          if (gSettings.EdidFixHorizontalSyncPulseWidth) {
+            ((UINT8*)gEDID)[64] = gSettings.EdidFixHorizontalSyncPulseWidth;
+          }
+          if (gSettings.EdidFixVideoInputSignal) {
+            ((UINT8*)gEDID)[20] = gSettings.EdidFixVideoInputSignal;
+          }
+          ((UINT8*)gEDID)[127] = (UINT8)(256 - Checksum8(gSettings.CustomEDID, 127));
+          gSettings.CustomEDID = gEDID;
+
+
+          if (!GlobalConfig.DebugLog) {
+            MsgLog("------- New EDID Table\n");
+            for (i=0; i<N; i+=10) {
+              MsgLog("%03d  |", i);
+              for (j=0; j<10; j++) {
+                if (i+j > N-1) break;
+                MsgLog("  %02x", gEDID[i+j]);
+              }
+              MsgLog("\n");
+            }
+          }
+        } else {
+          MsgLog("EdidFixHorizontalSyncPulseWidth and EdidFixVideoInputSignal not found\n");
+        }
+
       } else if (gSettings.CustomEDID) {
         MsgLog("  Use Custom EDID\n");
         
@@ -370,6 +431,34 @@ EFI_STATUS GetEdidDiscovered(VOID)
             }
           }
         }
+
+        // fixes garbled apple logo during second stage boot
+        MsgLog("3. EdidFixHorizontalSyncPulseWidth: 0x%02x, EdidFixVideoInputSignal: 0x%02x\n", gSettings.EdidFixHorizontalSyncPulseWidth, gSettings.EdidFixVideoInputSignal);
+        if (gSettings.EdidFixHorizontalSyncPulseWidth || gSettings.EdidFixVideoInputSignal) {
+          if (gSettings.EdidFixHorizontalSyncPulseWidth) {
+            ((UINT8*)gSettings.CustomEDID)[64] = gSettings.EdidFixHorizontalSyncPulseWidth;
+          }
+          if (gSettings.EdidFixVideoInputSignal) {
+            ((UINT8*)gSettings.CustomEDID)[20] = gSettings.EdidFixVideoInputSignal;
+          }
+
+          ((UINT8*)gSettings.CustomEDID)[127] = (UINT8)(256 - Checksum8(gSettings.CustomEDID, 127));
+          
+          if (!GlobalConfig.DebugLog) {
+            MsgLog("------- New Custom EDID Table\n");
+            for (i=0; i<N; i+=10) {
+              MsgLog("%03d  |", i);
+              for (j=0; j<10; j++) {
+                if (i+j > N-1) break;
+                MsgLog("  %02x", gSettings.CustomEDID[i+j]);
+              }
+              MsgLog("\n");
+            }
+          }
+        } else {
+          MsgLog("EdidFixHorizontalSyncPulseWidth and EdidFixVideoInputSignal not found\n");
+        }
+        
       }
     } else {
       //MsgLog ("Not Inject EDID\n");
@@ -392,5 +481,4 @@ EFI_STATUS GetEdidDiscovered(VOID)
   }
   return Status;
 }
-
 

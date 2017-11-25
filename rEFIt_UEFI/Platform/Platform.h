@@ -1003,6 +1003,8 @@ typedef struct {
   BOOLEAN                 LpcTune;
   UINT16                  DropOEM_DSM;
   UINT8                   *CustomEDID;
+  UINT8                   EdidFixHorizontalSyncPulseWidth;
+  UINT8                   EdidFixVideoInputSignal;
 
   CHAR16                  FBName[16];
   UINT16                  VideoPorts;
