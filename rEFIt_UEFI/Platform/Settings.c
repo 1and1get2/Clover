@@ -4115,38 +4115,31 @@ ParseSMBIOSSettings(
 
     if (((i[1] > '0') && (j[1] == '0')) || ((i[1] >= j[1]) && (i[2] > j[2]))) {
       DBG ("Using latest BiosVersion from clover\n");
-      DBG ("BiosVersion: %a\n", gSettings.RomVersion);
     } else if ((i[1] == j[1]) && (i[2] == j[2])) {
       if (((i[3] > '0') && (j[3] == '0')) || ((i[3] >= j[3]) && (i[4] > j[4]))) {
         DBG ("Using latest BiosVersion from clover\n");
-        DBG ("BiosVersion: %a\n", gSettings.RomVersion);
       } else if ((i[3] == j[3]) && (i[4] == j[4])) {
         if (((i[5] > '0') && (j[5] == '0')) || ((i[5] > '1') && (j[5] == '1')) ||
           ((i[5] > '2') && (j[5] == '2')) || ((i[5] >= j[5]) && (i[6] > j[6]))) {
           DBG ("Using latest BiosVersion from clover\n");
-          DBG ("BiosVersion: %a\n", gSettings.RomVersion);
         } else if ((i[5] == j[5]) && (i[6] == j[6])) {
           DBG ("Found same BiosVersion in clover and config\n");
-          DBG ("BiosVersion: %a\n", gSettings.RomVersion);
         } else {
           AsciiStrCpyS (gSettings.RomVersion, 64, Prop->string);
           DBG ("Using latest BiosVersion from config\n");
-          DBG ("BiosVersion: %a\n", gSettings.RomVersion);
         }
       } else {
         AsciiStrCpyS (gSettings.RomVersion, 64, Prop->string);
         DBG ("Using latest BiosVersion from config\n");
-        DBG ("BiosVersion: %a\n", gSettings.RomVersion);
       }
     } else {
       AsciiStrCpyS (gSettings.RomVersion, 64, Prop->string);
       DBG ("Using latest BiosVersion from config\n");
-      DBG ("BiosVersion: %a\n", gSettings.RomVersion);
     }
   } else {
     DBG ("BiosVersion: not set, Using BiosVersion from clover\n");
-    DBG ("BiosVersion: %a\n", gSettings.RomVersion);
   }
+  DBG ("BiosVersion: %a\n", gSettings.RomVersion);
 
   Prop1 = GetProperty (DictPointer, "BiosReleaseDate");
   if (Prop1 != NULL) {
@@ -4160,7 +4153,6 @@ ParseSMBIOSSettings(
           ((i[3] > j[3]) && (i[4] > j[4]))) {
           //DBG ("Found old BiosReleaseDate from config\n");
           //DBG ("Using latest BiosReleaseDate from clover\n");
-          DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
         } else {
           i = gSettings.RomVersion;
 
@@ -4175,14 +4167,12 @@ ParseSMBIOSSettings(
             //DBG ("The date in BiosVersion matches BiosReleaseDate!\n");
             AsciiStrCpyS (gSettings.ReleaseDate, 64, Prop1->string);
             //DBG ("Using latest BiosReleaseDate from config\n");
-            DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
           } else {
             //DBG ("BiosReleaseDate: %a from config\n", Prop1->string);
             //DBG ("The date in BiosReleaseDate from config doesn't match BiosVersion!\n");
             AsciiSPrint (Res1, 9, "%c%c/%c%c/%c%c\n", i[3], i[4], i[5], i[6], i[1], i[2]);
             AsciiStrCpyS (gSettings.ReleaseDate, 64,     Res1);
             //DBG ("Using the date of used BiosVersion\n");
-            DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
           }
         }
       } else if ((AsciiStrLen(i) == 8) && (AsciiStrLen(j) == 10)) {
@@ -4191,7 +4181,6 @@ ParseSMBIOSSettings(
           ((i[3] > j[3]) && (i[4] > j[4]))) {
           //DBG ("Found old BiosReleaseDate from config\n");
           //DBG ("Using latest BiosReleaseDate from clover\n");
-          DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
         } else {
           i = gSettings.RomVersion;
 
@@ -4207,14 +4196,12 @@ ParseSMBIOSSettings(
             AsciiSPrint (Res1, 9, "%c%c/%c%c/%c%c\n", j[0], j[1], j[3], j[4], j[8], j[9]);
             AsciiStrCpyS (gSettings.ReleaseDate, 64,     Res1);
             //DBG ("Using latest BiosReleaseDate from config, Found wrong date format and fixed it\n");
-            DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
           } else {
             //DBG ("BiosReleaseDate: %a from config\n", Prop1->string);
             //DBG ("The date in BiosReleaseDate from config doesn't match BiosVersion\n");
             AsciiSPrint (Res1, 9, "%c%c/%c%c/%c%c\n", i[3], i[4], i[5], i[6], i[1], i[2]);
             AsciiStrCpyS (gSettings.ReleaseDate, 64,     Res1);
             //DBG ("Using the date of used BiosVersion\n");
-            DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
           }
         }
       } else if ((AsciiStrLen(i) == 10) && (AsciiStrLen(j) == 10)) {
@@ -4223,7 +4210,6 @@ ParseSMBIOSSettings(
           ((i[3] > j[3]) && (i[4] > j[4]))) {
           //DBG ("Found old BiosReleaseDate from config\n");
           //DBG ("Using latest BiosReleaseDate from clover\n");
-          DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
         } else {
           i = gSettings.RomVersion;
 
@@ -4238,14 +4224,12 @@ ParseSMBIOSSettings(
             //DBG ("The date in BiosVersion matches BiosReleaseDate!\n");
             AsciiStrCpyS (gSettings.ReleaseDate, 64, Prop1->string);
             //DBG ("Using latest BiosReleaseDate from config\n");
-            DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
           } else {
             //DBG ("BiosReleaseDate: %a from config\n", Prop1->string);
             //DBG ("The date in BiosReleaseDate from config doesn't match BiosVersion!\n");
             AsciiSPrint (Res2, 11, "%c%c/%c%c/20%c%c\n", i[3], i[4], i[5], i[6], i[1], i[2]);
             AsciiStrCpyS (gSettings.ReleaseDate, 64,     Res2);
             //DBG ("Using the date of used BiosVersion\n");
-            DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
           }
         }
       } else if ((AsciiStrLen(i) == 10) && (AsciiStrLen(j) == 8)) {
@@ -4254,7 +4238,6 @@ ParseSMBIOSSettings(
           ((i[3] > j[3]) && (i[4] > j[4]))) {
           //DBG ("Found old BiosReleaseDate from config\n");
           //DBG ("Using latest BiosReleaseDate from clover\n");
-          DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
         } else {
           i = gSettings.RomVersion;
 
@@ -4270,14 +4253,12 @@ ParseSMBIOSSettings(
             AsciiSPrint (Res2, 11, "%c%c/%c%c/20%c%c\n", j[0], j[1], j[3], j[4], j[6], j[7]);
             AsciiStrCpyS (gSettings.ReleaseDate, 64,     Res2);
             //DBG ("Using latest BiosReleaseDate from config, Found wrong date format and fixed it\n");
-            DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
           } else {
             //DBG ("BiosReleaseDate: %a from config\n", Prop1->string);
             //DBG ("The date in BiosReleaseDate from config doesn't match BiosVersion\n");
             AsciiSPrint (Res2, 11, "%c%c/%c%c/20%c%c\n", i[3], i[4], i[5], i[6], i[1], i[2]);
             AsciiStrCpyS (gSettings.ReleaseDate, 64,     Res2);
             //DBG ("Using the date of used BiosVersion\n");
-            DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
           }
         }
       } else {
@@ -4295,22 +4276,18 @@ ParseSMBIOSSettings(
             AsciiSPrint (Res1, 9, "%c%c/%c%c/%c%c\n", j[3], j[4], j[5], j[6], j[1], j[2]);
             AsciiStrCpyS (gSettings.ReleaseDate, 64,     Res1);
             //DBG ("Using the date of used BiosVersion\n");
-            DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
           } else if ((AsciiStrLen(i) == 10)) {
             AsciiSPrint (Res2, 11, "%c%c/%c%c/20%c%c\n", j[3], j[4], j[5], j[6], j[1], j[2]);
             AsciiStrCpyS (gSettings.ReleaseDate, 64,     Res2);
             //DBG ("Using the date of used BiosVersion\n");
-            DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
           }
         } else {
           //DBG ("Using BiosReleaseDate from clover\n");
-          DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
         }
       }
     } else {
       //DBG ("BiosReleaseDate: set to %a from config, Ignore BiosReleaseDate\n", Prop1->string);
       //DBG ("Using BiosReleaseDate from clover\n");
-      DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
     }
   } else {
     if (Prop != NULL) {
@@ -4326,18 +4303,16 @@ ParseSMBIOSSettings(
         AsciiSPrint (Res1, 9, "%c%c/%c%c/%c%c\n", j[3], j[4], j[5], j[6], j[1], j[2]);
         AsciiStrCpyS (gSettings.ReleaseDate, 64,     Res1);
         //DBG ("BiosReleaseDate: not set, Using the date of used BiosVersion\n");
-        DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
       } else if ((AsciiStrLen(i) == 10)) {
         AsciiSPrint (Res2, 11, "%c%c/%c%c/20%c%c\n", j[3], j[4], j[5], j[6], j[1], j[2]);
         AsciiStrCpyS (gSettings.ReleaseDate, 64,     Res2);
         //DBG ("BiosReleaseDate: not set, Using the date of used BiosVersion\n");
-        DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
       }
     } else {
       //DBG ("BiosReleaseDate: not set, Using BiosReleaseDate from clover\n");
-      DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
     }
   }
+  DBG ("BiosReleaseDate: %a\n", gSettings.ReleaseDate);
 
   // Check for FirmwareFeatures and FirmwareFeaturesMask by Sherlocks
   Prop = GetProperty (DictPointer, "FirmwareFeatures");
@@ -5218,7 +5193,7 @@ GetUserSettings(
               DBG (" lenToFind: %d", Size);
               gSettings.LenToFind[i]        = (UINT32)Size;
               gSettings.PatchDsdtReplace[i] = GetDataSetting (Prop2, "Replace",  &Size);
-              DBG (", lenToReplace: %d\n", Size);
+              DBG (", lenToReplace: %d", Size);
               gSettings.LenToReplace[i]     = (UINT32)Size;
               gSettings.PatchDsdtTgt[i]     = GetDataSetting (Prop2, "TgtBridge", &Size);
               DBG (", Target Bridge: %a\n", gSettings.PatchDsdtTgt[i]);
@@ -5977,6 +5952,25 @@ GetUserSettings(
   return EFI_SUCCESS;
 }
 
+static CHAR8 *SearchString (
+  IN  CHAR8       *Source,
+  IN  UINT64      SourceSize,
+  IN  CHAR8       *Search,
+  IN  UINTN       SearchSize
+  )
+{
+  CHAR8 *End = Source + SourceSize;
+
+  while (Source < End) {
+    if (CompareMem(Source, Search, SearchSize) == 0) {
+      return Source;
+    } else {
+      Source++;
+    }
+  }
+  return NULL;
+}
+
 CHAR8 *GetOSVersion(IN LOADER_ENTRY *Entry)
 {
   CHAR8      *OSVersion  = NULL;
@@ -6062,6 +6056,9 @@ CHAR8 *GetOSVersion(IN LOADER_ENTRY *Entry)
         }
       } else {
         InstallerPlist = L"\\macOS Install Data\\Locked Files\\Boot Files\\SystemVersion.plist";
+        if (!FileExists (Entry->Volume->RootDir, InstallerPlist)) {
+          InstallerPlist = L"\\com.apple.boot.R\\SystemVersion.plist";
+        }
         if (FileExists (Entry->Volume->RootDir, InstallerPlist)) {
           Status = egLoadFile (Entry->Volume->RootDir, InstallerPlist, (UINT8 **)&PlistBuffer, &PlistLen);
           if (!EFI_ERROR (Status) && PlistBuffer != NULL && ParseXML (PlistBuffer, &Dict, 0) == EFI_SUCCESS) {
@@ -6071,14 +6068,33 @@ CHAR8 *GetOSVersion(IN LOADER_ENTRY *Entry)
             }
           }
         } else {
-          InstallerPlist = L"\\com.apple.boot.R\\SystemVersion.plist";
-          if (FileExists (Entry->Volume->RootDir, InstallerPlist)) {
-            Status = egLoadFile (Entry->Volume->RootDir, InstallerPlist, (UINT8 **)&PlistBuffer, &PlistLen);
-            if (!EFI_ERROR (Status) && PlistBuffer != NULL && ParseXML (PlistBuffer, &Dict, 0) == EFI_SUCCESS) {
-              Prop = GetProperty (Dict, "ProductVersion");
-              if (Prop != NULL && Prop->string != NULL && Prop->string[0] != '\0') {
-                OSVersion = AllocateCopyPool (AsciiStrSize (Prop->string), Prop->string);
+          // read ProductVersion/BuildVersion from ia.log
+          // implemented by Sherlocks
+          CHAR8  *i, *fileBuffer, *targetString, *Res1 = AllocateZeroPool(7), *Res2 = AllocateZeroPool(6), *Res3 = AllocateZeroPool(7);
+          UINTN  fileLen = 0;
+          CHAR16 *InstallerLog = L"\\Mac OS X Install Data\\ia.log";
+          if (!FileExists (Entry->Volume->RootDir, InstallerLog)) {
+            InstallerLog = L"\\OS X Install Data\\ia.log";
+          }
+          if (FileExists (Entry->Volume->RootDir, InstallerLog)) {
+            Status = egLoadFile(Entry->Volume->RootDir, InstallerLog, (UINT8 **)&fileBuffer, &fileLen);
+            if (!EFI_ERROR (Status)) {
+              targetString = (CHAR8*) AllocateZeroPool(fileLen+1);
+              CopyMem( (VOID*)targetString, (VOID*)fileBuffer, fileLen);
+              i = SearchString(targetString, fileLen, "Running OS Build: Mac OS X ", 27);
+              if (i[31] == '.') {
+                AsciiSPrint(Res1, 7, "%c%c.%c.%c\n", i[27], i[28], i[30], i[32]);
+                OSVersion = AllocateCopyPool (AsciiStrSize (Res1), Res1);
               }
+              if (i[40] == ')') {
+                AsciiSPrint (Res2, 6, "%c%c%c%c%c\n", i[35], i[36], i[37], i[38], i[39]);
+                Entry->BuildVersion = AllocateCopyPool (AsciiStrSize (Res2), Res2);
+              } else if (i[41] == ')') {
+                AsciiSPrint (Res3, 7, "%c%c%c%c%c%c\n", i[35], i[36], i[37], i[38], i[39], i[40]);
+                Entry->BuildVersion = AllocateCopyPool (AsciiStrSize (Res3), Res3);
+              }
+              FreePool(fileBuffer);
+              FreePool(targetString);
             }
           }
         }
@@ -7137,31 +7153,42 @@ SetFSInjection (
       return EFI_NOT_STARTED;
     }
 
-
-    // From 10.7 to 10.9, status of directly restoring ESD files or update from Appstore cannot block kernel cache. because there are boot.efi and kernelcache file without kernel file.
-    // After macOS installed, can block kernelcache file. because boot.efi can call kernel file from S/L/Kernels.
-    // For this reason, long time ago, chameleon's user restored ESD/Base System to made USB installer and added kernel file in root and custom kexts in S/L/E. then used "-f" option.
-    // From 10.10+, boot.efi call only prelinkedkernel file without kernel file. we can never block only kernelcache.
-    // The use of these block caches is meaningless in modern macOS. Unlike the old days, we do not have to do the tedious task of putting the files needed for booting into the S/L/E.
-    // So, clover could use "No Caches" option from 10.6 to 10.9.
-    // by Sherlocks, 2017.11
+    /*
+     From 10.7 to 10.9, status of directly restoring ESD files or update from Appstore cannot block kernel cache. because there are boot.efi and kernelcache file without kernel file.
+     After macOS installed, boot.efi can call kernel file from S/L/Kernels.
+     For this reason, long time ago, chameleon's user restored ESD/Base System to made USB installer and added kernel file in root and custom kexts in S/L/E. then used "-f" option.
+     From 10.10+, boot.efi call only prelinkedkernel file without kernel file. we can never block only kernelcache.
+     The use of these block caches is meaningless in modern macOS. Unlike the old days, we do not have to do the tedious task of putting the files needed for booting into the S/L/E.
+     by Sherlocks, 2017.11
+     */
 
     // Caution! Do not add this list. If add this list, will see "Kernel cache load error (0xe)". This is just a guideline.
-    // 10.7(ESD)
+    // === Installed ===
+    // 10.10+
+    //FSInject->AddStringToList(Blacklist, L"\\System\\Library\\PrelinkedKernels\\prelinkedkernel");
+    // === Recovery ===
+    // 10.7+
+    //FSInject->AddStringToList(Blacklist, L"\\com.apple.recovery.boot\\kernelcache");
+    // 10.10+
+    //FSInject->AddStringToList(Blacklist, L"\\com.apple.recovery.boot\\prelinkedkernel");
+    // === ESD/Appstore/createinstallmedia/startosinstall ===
+    // 10.7
     //FSInject->AddStringToList(Blacklist, L"\\kernelcache");
     //FSInject->AddStringToList(Blacklist, L"\\Mac OS X Install Data\\kernelcache");
-    // 10.7+(Recovery)
-    //FSInject->AddStringToList(Blacklist, L"\\com.apple.recovery.boot\\kernelcache");
-    // 10.8/10.9(ESD)
+    // 10.8/10.9
     //FSInject->AddStringToList(Blacklist, L"\\OS X Install Data\\kernelcache");
+    // 10.10
     //FSInject->AddStringToList(Blacklist, L"\\.IABootFiles\\kernelcache");
-    // 10.10+(ESD/Installed)
-    //FSInject->AddStringToList(Blacklist, L"\\System\\Library\\PrelinkedKernels\\prelinkedkernel");
-    // 10.11(Fusion Drive)
-    //FSInject->AddStringToList(Blacklist, L"\\com.apple.boot.S\\System\\Library\\PrelinkedKernels\prelinkedkernel");
-    // 10.12+(Appstore/createinstallmedia/startosinstall)
+    // 10.11+
+    //FSInject->AddStringToList(Blacklist, L"\\.IABootFiles\\prelinkedkernel");
+    // 10.12
     //FSInject->AddStringToList(Blacklist, L"\\macOS Install Data\\prelinkedkernel");
-    // 10.12+(Fusion Drive)
+    // 10.13+
+    //FSInject->AddStringToList(Blacklist, L"\\macOS Install Data\\Locked Files\\Boot Files\\prelinkedkernel");
+    // === Fusion Drive ===
+    // 10.11
+    //FSInject->AddStringToList(Blacklist, L"\\com.apple.boot.S\\System\\Library\\PrelinkedKernels\\prelinkedkernel");
+    // 10.12+
     //FSInject->AddStringToList(Blacklist, L"\\com.apple.boot.R\\prelinkedkernel");
 
 
@@ -7169,7 +7196,6 @@ SetFSInjection (
     // 10.6
     FSInject->AddStringToList(Blacklist, L"\\System\\Library\\Caches\\com.apple.kext.caches\\Startup\\Extensions.mkext");
     FSInject->AddStringToList(Blacklist, L"\\System\\Library\\Extensions.mkext");
-      
     // 10.6/10.7/10.8/10.9
     FSInject->AddStringToList(Blacklist, L"\\System\\Library\\Caches\\com.apple.kext.caches\\Startup\\kernelcache");
 

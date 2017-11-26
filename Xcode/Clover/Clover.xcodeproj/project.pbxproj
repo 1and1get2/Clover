@@ -3171,6 +3171,16 @@
 		2C7949EB1A0AA7F700D845B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					$SRCROOT/../../../MdePkg/Include/X64,
+					$SRCROOT/../../../MdePkg/Include,
+					$SRCROOT/../../../MdeModulePkg/Include,
+					$SRCROOT/../../../Clover/Include,
+					$SRCROOT/../../../Clover/FSInject/Include,
+					$SRCROOT/../../../IntelFrameworkPkg/Include,
+					$SRCROOT/../../../IntelFrameworkModulePkg/Include,
+					$SRCROOT/../../../MdePkg,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -3178,6 +3188,16 @@
 		2C7949EC1A0AA7F700D845B0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					$SRCROOT/../../../MdePkg/Include/X64,
+					$SRCROOT/../../../MdePkg/Include,
+					$SRCROOT/../../../MdeModulePkg/Include,
+					$SRCROOT/../../../Clover/Include,
+					$SRCROOT/../../../Clover/FSInject/Include,
+					$SRCROOT/../../../IntelFrameworkPkg/Include,
+					$SRCROOT/../../../IntelFrameworkModulePkg/Include,
+					$SRCROOT/../../../MdePkg,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
